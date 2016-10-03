@@ -16,6 +16,13 @@ class MorphAPI
     agent.get("https://morph.io/#{scraper}").forms[1].submit
   end
 
+  def environment_variables(scraper)
+    page = agent.get("https://morph.io/#{scraper}/settings")
+    names = page.css('#variables .row .scraper_variables_name input').map { |name| name['value'] }
+    values = page.css('#variables .row .scraper_variables_value textarea').map { |value| value.text.strip }
+    puts names.zip(values).map { |k, v| "#{k}=#{v}" }
+  end
+
   private
 
   attr_reader :username, :password
