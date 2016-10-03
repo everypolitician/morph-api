@@ -42,4 +42,4 @@ end
 
 morph = MorphAPI.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])
 
-morph.run_scraper(ARGV.first)
+morph.__send__(*ARGV)
