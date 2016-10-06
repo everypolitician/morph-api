@@ -23,6 +23,22 @@ class MorphAPI
     puts names.zip(values).map { |k, v| "#{k}=#{v}" }
   end
 
+  def set_environment_variable(scraper, name, value)
+    page = agent.get("https://morph.io/#{scraper}/settings")
+    form = page.forms[1]
+    binding.pry
+    existing = form.fields.find { |f| f.value == name }
+    if existing
+      form[existing.name.sub(/\[name\]$/, '[value]')] = value
+    else
+      field_id = Time.now.to_i
+      form["scraper[variables_attributes][#{field_id}][name]"] = name
+      form["scraper[variables_attributes][#{field_id}][value]"] = value
+    end
+    response = form.submit
+    response.code == '200'
+  end
+
   private
 
   attr_reader :username, :password
