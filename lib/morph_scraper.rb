@@ -3,15 +3,17 @@ require 'morph_scraper/version'
 require 'mechanize'
 
 class MorphScraper
-  def initialize(
-    scraper:,
-    github_username: ENV['MORPH_GITHUB_USERNAME'],
-    github_password: ENV['MORPH_GITHUB_PASSWORD']
-  )
+  def initialize(scraper)
     @scraper = scraper
-    @github_username = github_username
-    @github_password = github_password
-    sign_in_with_github
+  end
+
+  def authenticate_with_github(username: ENV['MORPH_GITHUB_USERNAME'], password: ENV['MORPH_GITHUB_PASSWORD'])
+    login = agent.get('https://morph.io/users/auth/github')
+    login.form['login'] = username
+    login.form['password'] = password
+    oauth = login.form.submit
+    response = oauth.link.click
+    response.code == '200'
   end
 
   def run_scraper
@@ -28,15 +30,7 @@ class MorphScraper
 
   private
 
-  attr_reader :scraper, :github_username, :github_password
-
-  def sign_in_with_github
-    github_oauth = agent.get('https://morph.io/users/auth/github')
-    github_oauth.form['login'] = github_username
-    github_oauth.form['password'] = github_password
-    oauth = github_oauth.form.submit
-    oauth.link.click
-  end
+  attr_reader :scraper
 
   def agent
     @agent ||= Mechanize.new

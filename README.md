@@ -25,12 +25,10 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-morph = MorphScraper.new(
-  scraper: 'tmtmtmtm/malta-parliament',
-  github_username: ENV['MORPH_GITHUB_USERNAME'],
-  github_password: ENV['MORPH_GITHUB_PASSWORD']
-)
+morph_scraper = MorphScraper.new('tmtmtmtm/malta-parliament')
+morph_scraper.authenticate_with_github(username: ENV['MORPH_GITHUB_USERNAME'], password: ENV['MORPH_GITHUB_PASSWORD'])
 morph.run_scraper
+morph.environment_variables
 ```
 
 Note that you need to own or be in the organization for a scraper in order to perform most operations.
