@@ -7,7 +7,10 @@ class MorphScraper
     @scraper = scraper
   end
 
-  def authenticate_with_github(username: ENV['MORPH_GITHUB_USERNAME'], password: ENV['MORPH_GITHUB_PASSWORD'])
+  def authenticate_with_github(
+    username: ENV['MORPH_GITHUB_USERNAME'],
+    password: ENV['MORPH_GITHUB_PASSWORD']
+  )
     login = agent.get('https://morph.io/users/auth/github')
     login.form['login'] = username
     login.form['password'] = password
