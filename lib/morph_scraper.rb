@@ -3,7 +3,11 @@ require 'morph_scraper/version'
 require 'mechanize'
 
 class MorphScraper
-  def initialize(scraper:, github_username: ENV['MORPH_GITHUB_USERNAME'], github_password: ENV['MORPH_GITHUB_PASSWORD'])
+  def initialize(
+    scraper:,
+    github_username: ENV['MORPH_GITHUB_USERNAME'],
+    github_password: ENV['MORPH_GITHUB_PASSWORD']
+  )
     @scraper = scraper
     @github_username = github_username
     @github_password = github_password
