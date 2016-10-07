@@ -1,8 +1,10 @@
 # MorphScraper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/morph_scraper`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is an unofficial wrapper for https://morph.io/ scrapers.
 
-TODO: Delete this and the text above, and describe your gem
+## Disclaimer
+
+Currently a lot of this gem's functionality is implemented by interfacing with the morph.io web interface directly, which means you'll need to provide your (or a bot's) GitHub username and password when using the library.
 
 ## Installation
 
@@ -22,7 +24,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+morph = MorphScraper.new(
+  scraper: 'tmtmtmtm/malta-parliament',
+  github_username: ENV['MORPH_GITHUB_USERNAME'],
+  github_password: ENV['MORPH_GITHUB_PASSWORD']
+)
+morph.run_scraper
+```
+
+Note that you need to own or be in the organization for a scraper in order to perform most operations.
 
 ## Development
 
