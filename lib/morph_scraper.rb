@@ -1,11 +1,8 @@
-require 'bundler/setup'
+require 'morph_scraper/version'
+
 require 'mechanize'
-require 'pry'
-require 'dotenv'
 
-Dotenv.load
-
-class MorphAPI
+class MorphScraper
   def initialize(username:, password:)
     @username = username
     @password = password
@@ -39,7 +36,3 @@ class MorphAPI
     @agent ||= Mechanize.new
   end
 end
-
-morph = MorphAPI.new(username: ENV['GITHUB_USERNAME'], password: ENV['GITHUB_PASSWORD'])
-
-morph.__send__(*ARGV)

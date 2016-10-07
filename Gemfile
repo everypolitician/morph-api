@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby '~> 2.1'
-
-gem 'mechanize'
-gem 'pry'
-gem 'dotenv'
+# Specify your gem's dependencies in morph_scraper.gemspec
+gemspec
