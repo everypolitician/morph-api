@@ -25,7 +25,7 @@ class MorphScraper
   end
 
   def environment_variables
-    page = agent.get("https://morph.io/#{scraper}/settings")
+    page = settings_page
     names = page.css('#variables .row .scraper_variables_name input').map { |name| name['value'] }
     values = page.css('#variables .row .scraper_variables_value textarea').map { |value| value.text.strip }
     Hash[names.zip(values)]
@@ -49,6 +49,10 @@ class MorphScraper
   private
 
   attr_reader :scraper
+
+  def settings_page
+    agent.get("https://morph.io/#{scraper}/settings")
+  end
 
   def agent
     @agent ||= Mechanize.new
