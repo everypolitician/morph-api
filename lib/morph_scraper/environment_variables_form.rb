@@ -13,6 +13,7 @@ class MorphScraper
         form["scraper[variables_attributes][#{field_id}][name]"] = name
         form["scraper[variables_attributes][#{field_id}][value]"] = value
       end
+      clean_textareas
       form.submit
       value
     end
@@ -20,5 +21,10 @@ class MorphScraper
     private
 
     attr_reader :form
+
+    def clean_textareas
+      # Workaround for Morph adding a newline to the beginning of a textarea.
+      form.textareas.each { |t| t.value = t.value.strip }
+    end
   end
 end
