@@ -20,7 +20,7 @@ class MorphScraper
 
     attr_reader :form
 
-    def set_form_env_var
+    def set_form_env_var(name, value)
       field_id = Time.now.to_i
       form["scraper[variables_attributes][#{field_id}][name]"] = name
       form["scraper[variables_attributes][#{field_id}][value]"] = value
